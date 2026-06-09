@@ -10,7 +10,7 @@
 $problemas = [
     1 => ['titulo' => 'Problema 1', 'descripcion' => 'Calcular media, desviación estándar, mínimo y máximo de 5 números positivos.'],
     2 => ['titulo' => 'Problema 2', 'descripcion' => 'Calcular la suma de los números del 1 al 1000.'],
-    3 => ['titulo' => 'Problema 3', 'descripcion' => 'Descripción pendiente del Problema 3.'],
+    3 => ['titulo' => 'Problema 3', 'descripcion' => 'Imprimir los N primeros múltiplos de 4.'],
     4 => ['titulo' => 'Problema 4', 'descripcion' => 'Descripción pendiente del Problema 4.'],
     5 => ['titulo' => 'Problema 5', 'descripcion' => 'Descripción pendiente del Problema 5.'],
     6 => ['titulo' => 'Problema 6', 'descripcion' => 'Descripción pendiente del Problema 6.'],
