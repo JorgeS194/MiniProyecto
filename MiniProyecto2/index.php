@@ -39,7 +39,13 @@ if ($problema !== null && $problema >= 1 && $problema <= 9) {
     if (file_exists($controllerFile)) {
         require_once $controllerFile;
         $controller = new $controllerClass();
-        $controller->index();
+
+        // GET → mostrar formulario vacío | POST → procesar datos enviados
+        if (Utilidades::esPost()) {
+            $controller->procesar();
+        } else {
+            $controller->index();
+        }
     } else {
         // Controlador no encontrado
         Utilidades::renderError("El controlador para el Problema {$problema} no fue encontrado.");
