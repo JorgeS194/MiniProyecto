@@ -3,7 +3,8 @@
  * header.php - Componente reutilizable de encabezado.
  *
  * Genera la estructura HTML inicial de cada página, incluyendo
- * el <head> con meta tags, enlace al CSS y el banner superior.
+ * el <head> con meta tags, enlace al CSS, fuentes premium de Google Fonts
+ * y el banner superior.
  *
  * Variables esperadas:
  *   $titulo (string) - Título de la página actual.
@@ -16,6 +17,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Mini Proyecto - Desarrollo Web VII">
     <title><?php echo Utilidades::escapar($titulo ?? 'Mini Proyecto'); ?></title>
+    <!-- Fuentes premium de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
