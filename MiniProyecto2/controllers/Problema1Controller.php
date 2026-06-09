@@ -22,14 +22,15 @@ class Problema1Controller
         $datos = [
             'resultado' => null,
             'errores'   => [],
+            'nums'      => array_fill(1, 5, ''),
         ];
 
         Utilidades::renderVista('problema1', 'Problema 1', $datos);
     }
 
     /**
-     * Recibe los datos enviados por POST, los valida y pasa los resultados a la vista.
-     * La lógica matemática se implementará en una fase posterior.
+     * Recibe los datos enviados por POST, los valida, sanitiza y calcula
+     * la media, desviación estándar, mínimo y máximo de 5 números positivos.
      *
      * @return void
      */
@@ -37,25 +38,48 @@ class Problema1Controller
     {
         $errores   = [];
         $resultado = null;
+        $nums      = [];
 
-        // ── Obtener y sanear datos del formulario ──
-        $dato1 = Utilidades::sanitizarTexto(Utilidades::obtenerPost('dato1'));
+        // ── Obtener, sanitizar y validar datos del formulario ──
+        for ($i = 1; $i <= 5; $i++) {
+            $campo = "num$i";
+            $valorRaw = Utilidades::obtenerPost($campo);
+            $valorSanitizado = Utilidades::sanitizarTexto($valorRaw);
+            $nums[$i] = $valorSanitizado;
 
-        // ── Validaciones básicas ──
-        if (!Utilidades::validarNumero($dato1)) {
-            $errores[] = 'El valor ingresado no es un número válido.';
+            if ($valorSanitizado === '') {
+                $errores[] = "El campo Número $i es requerido.";
+            } elseif (!Utilidades::validarNumero($valorSanitizado, false)) {
+                // Utilidades::validarNumero($val, false) valida que sea número y no sea negativo
+                $errores[] = "El campo Número $i debe ser un número válido y no puede ser negativo.";
+            } elseif ((float)$valorSanitizado <= 0) {
+                // Validación estricta de número positivo (> 0)
+                $errores[] = "El campo Número $i debe ser un número positivo estrictamente mayor que cero.";
+            }
         }
 
-        // ── Procesamiento (pendiente de implementación) ──
+        // ── Procesamiento si no hay errores de validación ──
         if (empty($errores)) {
-            // TODO: Implementar lógica del Problema 1
-            $resultado = "Datos recibidos correctamente. Lógica pendiente de implementación.";
+            // Convertir el array de inputs a float
+            $valores = array_map('floatval', $nums);
+
+            $media = Utilidades::calcularMedia($valores);
+            $desviacion = Utilidades::calcularDesviacionEstandar($valores);
+            $minimo = Utilidades::obtenerMinimo($valores);
+            $maximo = Utilidades::obtenerMaximo($valores);
+
+            $resultado = [
+                'media'      => $media,
+                'desviacion' => $desviacion,
+                'minimo'     => $minimo,
+                'maximo'     => $maximo,
+            ];
         }
 
         $datos = [
             'resultado' => $resultado,
             'errores'   => $errores,
-            'dato1'     => $dato1,
+            'nums'      => $nums,
         ];
 
         Utilidades::renderVista('problema1', 'Problema 1', $datos);

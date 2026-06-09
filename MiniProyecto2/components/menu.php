@@ -8,7 +8,7 @@
 
 // Definición de los 9 problemas con título y descripción corta.
 $problemas = [
-    1 => ['titulo' => 'Problema 1', 'descripcion' => 'Descripción pendiente del Problema 1.'],
+    1 => ['titulo' => 'Problema 1', 'descripcion' => 'Calcular media, desviación estándar, mínimo y máximo de 5 números positivos.'],
     2 => ['titulo' => 'Problema 2', 'descripcion' => 'Descripción pendiente del Problema 2.'],
     3 => ['titulo' => 'Problema 3', 'descripcion' => 'Descripción pendiente del Problema 3.'],
     4 => ['titulo' => 'Problema 4', 'descripcion' => 'Descripción pendiente del Problema 4.'],
