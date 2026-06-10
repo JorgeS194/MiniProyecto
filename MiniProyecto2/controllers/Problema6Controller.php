@@ -4,11 +4,15 @@
  *
  * Gestiona el flujo del Problema 6 según el patrón MVC:
  *   - index()    → muestra el formulario vacío (petición GET).
- *   - procesar() → recibe los datos del formulario y pasa resultados a la vista (petición POST).
+ *   - procesar() → recibe el presupuesto, valida y delega el cálculo al modelo (petición POST).
  *
  * @author  Estudiante
  * @version 2.0
  */
+
+// Incluir el modelo explícitamente ya que no hay un autoloader configurado
+require_once BASE_PATH . '/models/PresupuestoModel.php';
+
 class Problema6Controller
 {
     /**
@@ -20,8 +24,9 @@ class Problema6Controller
     public function index()
     {
         $datos = [
-            'resultado' => null,
-            'errores'   => [],
+            'resultado'   => null,
+            'errores'     => [],
+            'presupuesto' => '',
         ];
 
         Utilidades::renderVista('problema6', 'Problema 6', $datos);
@@ -29,7 +34,6 @@ class Problema6Controller
 
     /**
      * Recibe los datos enviados por POST, los valida y pasa los resultados a la vista.
-     * La lógica matemática se implementará en una fase posterior.
      *
      * @return void
      */
@@ -39,23 +43,40 @@ class Problema6Controller
         $resultado = null;
 
         // ── Obtener y sanear datos del formulario ──
-        $dato1 = Utilidades::sanitizarTexto(Utilidades::obtenerPost('dato1'));
+        $presupuestoRaw = Utilidades::obtenerPost('presupuesto');
+        $presupuesto = Utilidades::sanitizarTexto($presupuestoRaw);
 
-        // ── Validaciones básicas ──
-        if (!Utilidades::validarNumero($dato1)) {
-            $errores[] = 'El valor ingresado no es un número válido.';
+        // ── Validaciones ──
+        if ($presupuesto === '') {
+            $errores[] = 'El campo presupuesto es requerido.';
+        } elseif (!Utilidades::validarNumero($presupuesto, false)) {
+            $errores[] = 'El presupuesto debe ser un número válido, positivo y mayor a cero.';
+        } else {
+            $presupuestoFloat = (float)$presupuesto;
+            if ($presupuestoFloat <= 0) {
+                $errores[] = 'El presupuesto debe ser estrictamente mayor a 0.';
+            }
         }
 
-        // ── Procesamiento (pendiente de implementación) ──
+        // ── Procesamiento si no hay errores ──
         if (empty($errores)) {
-            // TODO: Implementar lógica del Problema 6
-            $resultado = "Datos recibidos correctamente. Lógica pendiente de implementación.";
+            $presupuestoFloat = (float)$presupuesto;
+            
+            // Lógica de cálculo delegada al modelo
+            $distribucion = PresupuestoModel::calcularDistribucion($presupuestoFloat);
+            $porcentajes = PresupuestoModel::obtenerPorcentajes();
+
+            $resultado = [
+                'presupuestoTotal' => $presupuestoFloat,
+                'distribucion'     => $distribucion,
+                'porcentajes'      => $porcentajes
+            ];
         }
 
         $datos = [
-            'resultado' => $resultado,
-            'errores'   => $errores,
-            'dato1'     => $dato1,
+            'resultado'   => $resultado,
+            'errores'     => $errores,
+            'presupuesto' => $presupuesto,
         ];
 
         Utilidades::renderVista('problema6', 'Problema 6', $datos);
