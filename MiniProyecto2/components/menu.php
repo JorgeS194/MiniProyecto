@@ -14,9 +14,9 @@ $problemas = [
     4 => ['titulo' => 'Problema 4', 'descripcion' => 'Calcular independientemente la suma de los números pares e impares comprendidos entre 1 y 200.'],
     5 => ['titulo' => 'Problema 5', 'descripcion' => 'Clasificar las edades de 5 personas y visualizar las estadísticas en una gráfica.'],
     6 => ['titulo' => 'Problema 6', 'descripcion' => 'Distribuir presupuesto hospitalario anual entre sus 3 diferentes áreas.'],
-    7 => ['titulo' => 'Problema 7', 'descripcion' => 'Descripción pendiente del Problema 7.'],
-    8 => ['titulo' => 'Problema 8', 'descripcion' => 'Descripción pendiente del Problema 8.'],
-    9 => ['titulo' => 'Problema 9', 'descripcion' => 'Descripción pendiente del Problema 9.'],
+    7 => ['titulo' => 'Problema 7', 'descripcion' => 'Calculadora de datos estadísticos: promedio, desviación estándar, mínima y máxima de N notas.'],
+    8 => ['titulo' => 'Problema 8', 'descripcion' => 'Determinar la estación del año a partir de una fecha ingresada.'],
+    9 => ['titulo' => 'Problema 9', 'descripcion' => 'Generar las 15 primeras potencias de un número entre 1 y 9.'],
 ];
 ?>
 
