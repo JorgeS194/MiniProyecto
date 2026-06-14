@@ -21,6 +21,5 @@ $fechaCompleta = "$nombreDia, $diaNum de $nombreMes de $anio";
 
 </footer>
 
-<script src="assets/js/main.js"></script>
 </body>
 </html>
