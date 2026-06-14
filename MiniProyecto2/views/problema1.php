@@ -26,6 +26,9 @@
 
     <form method="POST" action="index.php?problema=1" id="formProblema1" class="panel-formulario">
         <h3 class="titulo-formulario">Ingresar 5 números positivos (mayores que cero):</h3>
+        <p style="font-size: 0.9rem; color: var(--color-texto-claro); margin-bottom: 1.5rem;">
+            Ingrese valores positivos. Por seguridad, el valor máximo permitido por campo es 1,000,000.
+        </p>
         
         <div class="form-grid grid-inputs">
             <?php for ($i = 1; $i <= Problema1Controller::TOTAL_NUMEROS; $i++): ?>
@@ -36,6 +39,7 @@
                         step="any"
                         id="num<?php echo $i; ?>"
                         name="num<?php echo $i; ?>"
+                        max="1000000"
                         placeholder="Ej. 12.5"
                         value="<?php echo Utilidades::escapar($nums[$i] ?? ''); ?>"
                         style="width: 100%; padding: 0.65rem; border: 1px solid var(--color-borde); border-radius: 6px; font-size: 1rem;"

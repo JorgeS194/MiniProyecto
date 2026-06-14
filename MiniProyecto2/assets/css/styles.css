@@ -367,6 +367,8 @@ h6,
 .tarjeta-metrica__valor {
     font-size: 1.4rem;
     color: var(--color-texto);
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .tarjeta-metrica__valor--grande {
@@ -401,8 +403,9 @@ h6,
 
 .tabla-multiplos th,
 .tabla-multiplos td {
-    padding: 0.85rem 2rem;
+    padding: 0.85rem 2.5rem;
     text-align: center;
+    vertical-align: middle;
 }
 
 .tabla-multiplos th {

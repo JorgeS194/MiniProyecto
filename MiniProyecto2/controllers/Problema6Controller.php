@@ -15,6 +15,7 @@ require_once BASE_PATH . '/models/PresupuestoModel.php';
 
 class Problema6Controller
 {
+    const PRESUPUESTO_MAXIMO = 1000000000000;
     /**
      * Muestra el formulario del Problema 6 sin procesar datos.
      * Se invoca cuando el usuario accede por primera vez (GET).
@@ -55,6 +56,9 @@ class Problema6Controller
             $presupuestoFloat = (float)$presupuesto;
             if ($presupuestoFloat <= 0) {
                 $errores[] = 'El presupuesto debe ser estrictamente mayor a 0.';
+            } elseif ($presupuestoFloat > self::PRESUPUESTO_MAXIMO) {
+                $errores[] = 'El presupuesto no puede ser mayor a ' .
+                    Utilidades::formatearNumero(self::PRESUPUESTO_MAXIMO, 0) . '.';
             }
         }
 

@@ -34,13 +34,14 @@
                 id="presupuesto"
                 name="presupuesto"
                 min="0.01"
+                max="1000000000000"
                 placeholder="Ej. 1000000"
                 value="<?php echo Utilidades::escapar($presupuesto ?? ''); ?>"
                 style="width: 100%; padding: 0.65rem; border: 1px solid var(--color-borde); border-radius: 6px; font-size: 1rem;"
                 required
             >
             <span style="font-size: 0.85rem; color: var(--color-texto-claro); margin-top: 0.25rem; display: block;">
-                Ingrese un valor numérico positivo mayor a cero.
+                Ingrese un valor numérico positivo mayor a cero (hasta 1,000,000,000,000).
             </span>
         </div>
         

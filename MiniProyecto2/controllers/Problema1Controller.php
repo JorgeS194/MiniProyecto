@@ -12,6 +12,7 @@
 class Problema1Controller
 {
     const TOTAL_NUMEROS = 5;
+    const VALOR_MAXIMO = 1000000;
 
     /**
      * Muestra el formulario del Problema 1 sin procesar datos.
@@ -57,6 +58,9 @@ class Problema1Controller
             } elseif ((float)$valorSanitizado <= 0) {
                 // Validación estricta de número positivo (> 0)
                 $errores[] = "El campo Número $i debe ser un número positivo estrictamente mayor que cero.";
+            } elseif ((float)$valorSanitizado > self::VALOR_MAXIMO) {
+                $errores[] = "El campo Número $i no puede ser mayor a " .
+                    Utilidades::formatearNumero(self::VALOR_MAXIMO, 0) . ".";
             }
         }
 
