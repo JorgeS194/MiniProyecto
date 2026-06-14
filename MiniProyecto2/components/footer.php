@@ -15,8 +15,10 @@ $fechaCompleta = "$nombreDia, $diaNum de $nombreMes de $anio";
 
 <!-- ═══ Pie de página ═══ -->
 <footer class="footer">
-    <p>&copy; <?php echo $anio; ?> &mdash; Mini Proyecto &middot; Desarrollo Web VII</p>
+    <p>&copy; <?php echo $anio; ?> &mdash; Mini Proyecto &middot; Desarrollo de Software VII</p>
+    <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.8;"><?php echo "Jorge Sarmiento y Leonardo Castro" ?></p>
     <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.8;"><?php echo $fechaCompleta; ?></p>
+
 </footer>
 
 <script src="assets/js/main.js"></script>

@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mini Proyecto - Desarrollo Web VII">
+    <meta name="description" content="Mini Proyecto - Desarrollo de Software VII">
     <title><?php echo Utilidades::escapar($titulo ?? 'Mini Proyecto'); ?></title>
     <!-- Fuentes premium de Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +27,6 @@
 
 <!-- ═══ Banner superior ═══ -->
 <header class="header">
-    <h1>🎓 Mini Proyecto - Desarrollo Web VII</h1>
-    <p>Arquitectura MVC &middot; PHP Puro &middot; PSR-1</p>
+    <h1>🎓 Mini Proyecto - Desarrollo de Software VII</h1>
+    <p>Arquitectura MVC &middot; PHP Puro &middot; PSR-1 &middot; OWASP &middot; DRY</p>
 </header>
