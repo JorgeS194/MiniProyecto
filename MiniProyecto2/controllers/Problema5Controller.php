@@ -11,6 +11,13 @@
  */
 class Problema5Controller
 {
+    const TOTAL_PERSONAS = 5;
+    const EDAD_MIN = 0;
+    const EDAD_MAX = 120;
+    const EDAD_LIMITE_NINO = 12;
+    const EDAD_LIMITE_ADOLESCENTE = 17;
+    const EDAD_LIMITE_ADULTO = 64;
+
     /**
      * Muestra el formulario del Problema 5 sin procesar datos.
      * Se invoca cuando el usuario accede por primera vez (GET).
@@ -22,7 +29,7 @@ class Problema5Controller
         $datos = [
             'resultado' => null,
             'errores'   => [],
-            'edades'    => array_fill(1, 5, ''),
+            'edades'    => array_fill(1, self::TOTAL_PERSONAS, ''),
         ];
 
         Utilidades::renderVista('problema5', 'Problema 5', $datos);
@@ -40,7 +47,7 @@ class Problema5Controller
         $edades    = [];
 
         // ── Obtener y sanear datos del formulario ──
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= self::TOTAL_PERSONAS; $i++) {
             $campo = "edad$i";
             $valorRaw = Utilidades::obtenerPost($campo);
             $valorSanitizado = Utilidades::sanitizarTexto($valorRaw);
@@ -55,7 +62,7 @@ class Problema5Controller
                 $intVal = (int)$valorSanitizado;
                 if ($floatVal != $intVal) {
                     $errores[] = "El campo Edad $i debe ser un número entero.";
-                } elseif ($intVal < 0 || $intVal > 120) {
+                } elseif ($intVal < self::EDAD_MIN || $intVal > self::EDAD_MAX) {
                     $errores[] = "El campo Edad $i debe estar entre 0 y 120 años.";
                 }
             }
@@ -78,13 +85,13 @@ class Problema5Controller
                 
                 // Clasificación
                 $categoria = '';
-                if ($edad <= 12) {
+                if ($edad <= self::EDAD_LIMITE_NINO) {
                     $clasificacion['ninos']++;
                     $categoria = 'Niño (0-12)';
-                } elseif ($edad <= 17) {
+                } elseif ($edad <= self::EDAD_LIMITE_ADOLESCENTE) {
                     $clasificacion['adolescentes']++;
                     $categoria = 'Adolescente (13-17)';
-                } elseif ($edad <= 64) {
+                } elseif ($edad <= self::EDAD_LIMITE_ADULTO) {
                     $clasificacion['adultos']++;
                     $categoria = 'Adulto (18-64)';
                 } else {

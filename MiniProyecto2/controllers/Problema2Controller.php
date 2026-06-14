@@ -11,6 +11,9 @@
  */
 class Problema2Controller
 {
+    const MAX_LIMITE = 1000;
+    const UMBRAL_DETALLE = 5;
+
     /**
      * Muestra el formulario del Problema 2.
      * Se invoca cuando el usuario accede por primera vez (GET).
@@ -56,8 +59,8 @@ class Problema2Controller
                 $errores[] = 'El límite debe ser un número entero.';
             } elseif ($limiteInt < 1) {
                 $errores[] = 'El límite debe ser al menos 1.';
-            } elseif ($limiteInt > 100000) { // Límite máximo razonable por seguridad (Prevención de DoS)
-                $errores[] = 'El límite es demasiado grande. Ingrese un valor menor o igual a 100,000.';
+            } elseif ($limiteInt > self::MAX_LIMITE) { // Límite máximo razonable por seguridad (Prevención de DoS)
+                $errores[] = 'El límite es demasiado grande. Ingrese un valor menor o igual a 1000.';
             }
         }
 
@@ -73,7 +76,7 @@ class Problema2Controller
 
             // Explicación detallada del procedimiento para mostrar en la vista
             $procedimiento = "Suma = 1 + 2 + 3 + ... + " . $n;
-            if ($n <= 5) {
+            if ($n <= self::UMBRAL_DETALLE) {
                 $pasos = [];
                 for ($i = 1; $i <= $n; $i++) {
                     $pasos[] = $i;

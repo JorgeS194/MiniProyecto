@@ -21,19 +21,10 @@
         Calcular la suma de los números enteros del 1 hasta el límite ingresado.
     </p>
 
-    <?php if (!empty($errores)): ?>
-        <div class="error-box" style="text-align:left; margin-bottom:1.5rem;">
-            <strong>⚠️ Por favor corrige los siguientes errores:</strong>
-            <ul style="margin-top:.5rem; padding-left:1.25rem;">
-                <?php foreach ($errores as $e): ?>
-                    <li><?php echo Utilidades::escapar($e); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <?php Utilidades::mostrarErrores($errores); ?>
 
-    <form method="POST" action="index.php?problema=2" id="formProblema2" style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
-        <h3 style="margin-bottom: 1.5rem; color: var(--color-primario);">Configurar Límite de la Suma:</h3>
+    <form method="POST" action="index.php?problema=2" id="formProblema2" class="panel-formulario">
+        <h3 class="titulo-formulario">Configurar Límite de la Suma:</h3>
         
         <div class="form-group" style="margin-bottom: 1.5rem;">
             <label for="limite" style="font-weight: 600; color: var(--color-texto);">Sumar desde 1 hasta:</label>
@@ -42,7 +33,7 @@
                 id="limite"
                 name="limite"
                 min="1"
-                max="100000"
+                max="1000"
                 placeholder="Ej. 1000"
                 value="<?php echo Utilidades::escapar($limite ?? '1000'); ?>"
                 style="width: 100%; padding: 0.65rem; border: 1px solid var(--color-borde); border-radius: 6px; font-size: 1rem;"
@@ -53,31 +44,31 @@
             </span>
         </div>
         
-        <button type="submit" class="btn" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 600; transition: background 0.2s;">
+        <button type="submit" class="btn btn-bloque">
             ⚡ Calcular Sumatoria
         </button>
     </form>
 
     <?php if ($resultado !== null): ?>
-        <div class="resultado" style="margin-top: 2rem; background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde); border-left: 6px solid var(--color-primario);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-primario); font-size: 1.35rem; margin-bottom: 1.5rem;">
+        <div class="resultado panel-resultado">
+            <h3 class="panel-resultado__titulo">
                 📊 Resultado del Cálculo
             </h3>
             
             <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                <div style="background: var(--color-fondo); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-exito);">
-                    <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Suma Total</span>
-                    <strong style="font-size: 2rem; color: var(--color-texto);"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['suma'], 0)); ?></strong>
+                <div class="tarjeta-metrica tarjeta-metrica--exito">
+                    <span class="tarjeta-metrica__etiqueta">Suma Total</span>
+                    <strong class="tarjeta-metrica__valor tarjeta-metrica__valor--grande"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['suma'], 0)); ?></strong>
                 </div>
 
-                <div style="background: var(--color-fondo); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-primario);">
-                    <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Procedimiento Aplicado (Bucle)</span>
-                    <code style="font-family: Consolas, Monaco, monospace; font-size: 1.05rem; color: var(--color-texto);"><?php echo Utilidades::escapar($resultado['procedimiento']); ?></code>
+                <div class="tarjeta-metrica">
+                    <span class="tarjeta-metrica__etiqueta">Procedimiento Aplicado (Bucle)</span>
+                    <code class="bloque-codigo" style="font-size: 1.05rem;"><?php echo Utilidades::escapar($resultado['procedimiento']); ?></code>
                 </div>
 
-                <div style="background: var(--color-fondo); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-secundario);">
-                    <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Comprobación Matemática</span>
-                    <code style="font-family: Consolas, Monaco, monospace; font-size: 1.05rem; color: var(--color-texto);"><?php echo Utilidades::escapar($resultado['formula']); ?></code>
+                <div class="tarjeta-metrica tarjeta-metrica--secundario">
+                    <span class="tarjeta-metrica__etiqueta">Comprobación Matemática</span>
+                    <code class="bloque-codigo" style="font-size: 1.05rem;"><?php echo Utilidades::escapar($resultado['formula']); ?></code>
                 </div>
             </div>
         </div>

@@ -293,6 +293,46 @@ class Utilidades
         return $html;
     }
 
+    /**
+     * Muestra la caja de errores de validación si el array no está vacío.
+     *
+     * Centraliza el bloque HTML de errores para evitar repetición en
+     * todas las vistas (principio DRY). Sigue el mismo patrón que
+     * volverMenu(). Aplica escape XSS a cada mensaje (OWASP).
+     *
+     * Ejemplo de uso desde una vista:
+     *   Utilidades::mostrarErrores($errores);
+     *
+     * @param  array  $errores Array de mensajes de error a mostrar.
+     * @param  bool   $echo    Si es true (por defecto), imprime el HTML.
+     *                         Si es false, retorna el HTML como cadena.
+     * @return string|void     Retorna el HTML solo si $echo es false.
+     */
+    public static function mostrarErrores(array $errores, $echo = true)
+    {
+        if (empty($errores)) {
+            return;
+        }
+
+        $html  = '<div class="error-box" style="text-align:left; margin-bottom:1.5rem;">';
+        $html .= '<strong>⚠️ Por favor corrige los siguientes errores:</strong>';
+        $html .= '<ul style="margin-top:.5rem; padding-left:1.25rem;">';
+
+        foreach ($errores as $e) {
+            $html .= '<li>' . self::escapar($e) . '</li>';
+        }
+
+        $html .= '</ul>';
+        $html .= '</div>';
+
+        if ($echo) {
+            echo $html;
+            return;
+        }
+
+        return $html;
+    }
+
     // =========================================================================
     // SECCIÓN 5 — Métodos heredados de la versión anterior (v1.0)
     // =========================================================================

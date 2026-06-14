@@ -11,6 +11,8 @@
  */
 class Problema3Controller
 {
+    const MAX_N = 1000;
+
     /**
      * Muestra el formulario del Problema 3.
      * Se invoca cuando el usuario accede por primera vez (GET).
@@ -56,7 +58,7 @@ class Problema3Controller
                 $errores[] = 'La cantidad N debe ser un número entero.';
             } elseif ($nInt < 1) {
                 $errores[] = 'La cantidad N debe ser mayor o igual a 1.';
-            } elseif ($nInt > 1000) { // Límite máximo razonable por seguridad (Prevención de DoS / Overflow)
+            } elseif ($nInt > self::MAX_N) { // Límite máximo razonable por seguridad (Prevención de DoS / Overflow)
                 $errores[] = 'La cantidad N es demasiado grande. Ingrese un valor menor o igual a 1,000.';
             }
         }

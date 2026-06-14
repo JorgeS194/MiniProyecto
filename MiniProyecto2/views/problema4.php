@@ -22,19 +22,10 @@
         Calcular independientemente la suma de los números pares e impares comprendidos entre 1 y el límite ingresado.
     </p>
 
-    <?php if (!empty($errores)): ?>
-        <div class="error-box" style="text-align:left; margin-bottom:1.5rem;">
-            <strong>⚠️ Por favor corrige los siguientes errores:</strong>
-            <ul style="margin-top:.5rem; padding-left:1.25rem;">
-                <?php foreach ($errores as $e): ?>
-                    <li><?php echo Utilidades::escapar($e); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <?php Utilidades::mostrarErrores($errores); ?>
 
-    <form method="POST" action="index.php?problema=4" id="formProblema4" style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
-        <h3 style="margin-bottom: 1.5rem; color: var(--color-primario);">Configurar Límite del Rango:</h3>
+    <form method="POST" action="index.php?problema=4" id="formProblema4" class="panel-formulario">
+        <h3 class="titulo-formulario">Configurar Límite del Rango:</h3>
         
         <div class="form-group" style="margin-bottom: 1.5rem;">
             <label for="limite" style="font-weight: 600; color: var(--color-texto);">Calcular del 1 hasta:</label>
@@ -54,7 +45,7 @@
             </span>
         </div>
         
-        <button type="submit" class="btn" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 600; transition: background 0.2s;">
+        <button type="submit" class="btn btn-bloque">
             ⚡ Calcular Sumatorias
         </button>
     </form>
@@ -68,7 +59,7 @@
             <div class="resultados-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
                 
                 <!-- Tarjeta de Números Pares -->
-                <div style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde); border-top: 5px solid var(--color-primario); display: flex; flex-direction: column; gap: 1.25rem;">
+                <div class="panel-columna" style="border-top: 5px solid var(--color-primario);">
                     <div>
                         <h4 style="color: var(--color-primario); font-size: 1.15rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.4rem;">
                             🔵 Números Pares
@@ -76,19 +67,19 @@
                         <p style="font-size: 0.85rem; color: var(--color-texto-claro);">Sumatoria de valores divisibles por 2</p>
                     </div>
 
-                    <div style="background: var(--color-fondo); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-primario);">
-                        <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Suma Total</span>
-                        <strong style="font-size: 2.25rem; color: var(--color-texto);"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['sumaPares'], 0)); ?></strong>
+                    <div class="tarjeta-metrica">
+                        <span class="tarjeta-metrica__etiqueta">Suma Total</span>
+                        <strong class="tarjeta-metrica__valor tarjeta-metrica__valor--xl"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['sumaPares'], 0)); ?></strong>
                     </div>
 
                     <div>
-                        <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.4rem;">Procedimiento</span>
-                        <code style="font-family: Consolas, Monaco, monospace; font-size: 0.95rem; color: var(--color-texto); word-break: break-all; display: block; background: var(--color-fondo); padding: 0.75rem; border-radius: 6px; border: 1px solid var(--color-borde);"><?php echo Utilidades::escapar($resultado['procPares']); ?></code>
+                        <span class="tarjeta-metrica__etiqueta" style="margin-bottom: 0.4rem;">Procedimiento</span>
+                        <code class="bloque-codigo"><?php echo Utilidades::escapar($resultado['procPares']); ?></code>
                     </div>
                 </div>
 
                 <!-- Tarjeta de Números Impares -->
-                <div style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde); border-top: 5px solid var(--color-secundario); display: flex; flex-direction: column; gap: 1.25rem;">
+                <div class="panel-columna" style="border-top: 5px solid var(--color-secundario);">
                     <div>
                         <h4 style="color: var(--color-secundario); font-size: 1.15rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.4rem;">
                             🟣 Números Impares
@@ -96,14 +87,14 @@
                         <p style="font-size: 0.85rem; color: var(--color-texto-claro);">Sumatoria de valores no divisibles por 2</p>
                     </div>
 
-                    <div style="background: var(--color-fondo); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-secundario);">
-                        <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Suma Total</span>
-                        <strong style="font-size: 2.25rem; color: var(--color-texto);"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['sumaImpares'], 0)); ?></strong>
+                    <div class="tarjeta-metrica tarjeta-metrica--secundario">
+                        <span class="tarjeta-metrica__etiqueta">Suma Total</span>
+                        <strong class="tarjeta-metrica__valor tarjeta-metrica__valor--xl"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['sumaImpares'], 0)); ?></strong>
                     </div>
 
                     <div>
-                        <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.4rem;">Procedimiento</span>
-                        <code style="font-family: Consolas, Monaco, monospace; font-size: 0.95rem; color: var(--color-texto); word-break: break-all; display: block; background: var(--color-fondo); padding: 0.75rem; border-radius: 6px; border: 1px solid var(--color-borde);"><?php echo Utilidades::escapar($resultado['procImpares']); ?></code>
+                        <span class="tarjeta-metrica__etiqueta" style="margin-bottom: 0.4rem;">Procedimiento</span>
+                        <code class="bloque-codigo"><?php echo Utilidades::escapar($resultado['procImpares']); ?></code>
                     </div>
                 </div>
 

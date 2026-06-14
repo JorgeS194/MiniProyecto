@@ -11,6 +11,8 @@
  */
 class Problema1Controller
 {
+    const TOTAL_NUMEROS = 5;
+
     /**
      * Muestra el formulario del Problema 1 sin procesar datos.
      * Se invoca cuando el usuario accede por primera vez (GET).
@@ -22,7 +24,7 @@ class Problema1Controller
         $datos = [
             'resultado' => null,
             'errores'   => [],
-            'nums'      => array_fill(1, 5, ''),
+            'nums'      => array_fill(1, self::TOTAL_NUMEROS, ''),
         ];
 
         Utilidades::renderVista('problema1', 'Problema 1', $datos);
@@ -41,7 +43,7 @@ class Problema1Controller
         $nums      = [];
 
         // ── Obtener, sanitizar y validar datos del formulario ──
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= self::TOTAL_NUMEROS; $i++) {
             $campo = "num$i";
             $valorRaw = Utilidades::obtenerPost($campo);
             $valorSanitizado = Utilidades::sanitizarTexto($valorRaw);

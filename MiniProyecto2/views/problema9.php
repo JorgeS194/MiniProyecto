@@ -21,19 +21,10 @@
         Ingrese un número entre 1 y 9 para generar sus 15 primeras potencias.
     </p>
 
-    <?php if (!empty($errores)): ?>
-        <div class="error-box" style="text-align:left; margin-bottom:1.5rem;">
-            <strong>⚠️ Por favor corrige los siguientes errores:</strong>
-            <ul style="margin-top:.5rem; padding-left:1.25rem;">
-                <?php foreach ($errores as $e): ?>
-                    <li><?php echo Utilidades::escapar($e); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <?php Utilidades::mostrarErrores($errores); ?>
 
-    <form method="POST" action="index.php?problema=9" id="formProblema9" style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
-        <h3 style="margin-bottom: 1.5rem; color: var(--color-primario);">Generador de Potencias:</h3>
+    <form method="POST" action="index.php?problema=9" id="formProblema9" class="panel-formulario">
+        <h3 class="titulo-formulario">Generador de Potencias:</h3>
 
         <div class="form-group" style="margin-bottom: 1.5rem;">
             <label for="numero" style="font-weight: 600; color: var(--color-texto);">Número base (1-9):</label>
@@ -53,14 +44,14 @@
             </span>
         </div>
 
-        <button type="submit" class="btn" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 600; transition: background 0.2s;">
+        <button type="submit" class="btn btn-bloque">
             ⚡ Generar Potencias
         </button>
     </form>
 
     <?php if ($resultado !== null): ?>
-        <div class="resultado" style="margin-top: 2rem; background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde); border-left: 6px solid var(--color-primario);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-primario); font-size: 1.35rem; margin-bottom: 1.5rem;">
+        <div class="resultado panel-resultado">
+            <h3 class="panel-resultado__titulo">
                 📊 Tabla de Potencias de <?php echo Utilidades::escapar($resultado['base']); ?>
             </h3>
             <p style="color: var(--color-texto-claro); margin-bottom: 1rem;">
@@ -79,9 +70,9 @@
                     <tbody>
                         <?php foreach ($resultado['potencias'] as $p): ?>
                             <tr>
-                                <td style="font-weight: 600; color: var(--color-texto-claro);"><?php echo Utilidades::escapar($p['exponente']); ?></td>
-                                <td style="font-family: Consolas, Monaco, monospace;"><?php echo Utilidades::escapar($p['operacion']); ?></td>
-                                <td style="font-weight: bold; color: var(--color-primario);"><?php echo Utilidades::escapar(Utilidades::formatearNumero($p['valor'], 0)); ?></td>
+                                <td><?php echo Utilidades::escapar($p['exponente']); ?></td>
+                                <td><?php echo Utilidades::escapar($p['operacion']); ?></td>
+                                <td><?php echo Utilidades::escapar(Utilidades::formatearNumero($p['valor'], 0)); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -11,6 +11,9 @@
  */
 class Problema4Controller
 {
+    const MAX_LIMITE = 100000;
+    const UMBRAL_DETALLE = 10;
+
     /**
      * Muestra el formulario del Problema 4.
      * Se invoca cuando el usuario accede por primera vez (GET).
@@ -57,7 +60,7 @@ class Problema4Controller
                 $errores[] = 'El límite debe ser un número entero.';
             } elseif ($limiteInt < 1) {
                 $errores[] = 'El límite debe ser mayor o igual a 1.';
-            } elseif ($limiteInt > 100000) { // Prevención de DoS
+            } elseif ($limiteInt > self::MAX_LIMITE) { // Prevención de DoS
                 $errores[] = 'El límite es demasiado grande. Ingrese un valor menor o igual a 100,000.';
             }
         }
@@ -81,7 +84,7 @@ class Problema4Controller
             $ultimoPar = ($n % 2 === 0) ? $n : $n - 1;
             $ultimoImpar = ($n % 2 === 0) ? $n - 1 : $n;
 
-            if ($n <= 10) {
+            if ($n <= self::UMBRAL_DETALLE) {
                 $pasosPares = [];
                 $pasosImpares = [];
                 for ($i = 1; $i <= $n; $i++) {

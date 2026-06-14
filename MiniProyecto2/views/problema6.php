@@ -21,19 +21,10 @@
         Calcular la distribución del presupuesto anual de un hospital en sus tres áreas principales.
     </p>
 
-    <?php if (!empty($errores)): ?>
-        <div class="error-box" style="text-align:left; margin-bottom:1.5rem;">
-            <strong>⚠️ Por favor corrige los siguientes errores:</strong>
-            <ul style="margin-top:.5rem; padding-left:1.25rem;">
-                <?php foreach ($errores as $e): ?>
-                    <li><?php echo Utilidades::escapar($e); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <?php Utilidades::mostrarErrores($errores); ?>
 
-    <form method="POST" action="index.php?problema=6" id="formProblema6" style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
-        <h3 style="margin-bottom: 1.5rem; color: var(--color-primario);">Ingresar Presupuesto Anual:</h3>
+    <form method="POST" action="index.php?problema=6" id="formProblema6" class="panel-formulario">
+        <h3 class="titulo-formulario">Ingresar Presupuesto Anual:</h3>
         
         <div class="form-group" style="margin-bottom: 1.5rem;">
             <label for="presupuesto" style="font-weight: 600; color: var(--color-texto);">Monto Total ($):</label>
@@ -53,7 +44,7 @@
             </span>
         </div>
         
-        <button type="submit" class="btn" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 600; transition: background 0.2s;">
+        <button type="submit" class="btn btn-bloque">
             ⚡ Calcular Distribución
         </button>
     </form>
@@ -68,7 +59,7 @@
                 
                 <!-- Columna Detalles de Distribución -->
                 <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <div style="background: var(--color-superficie); padding: 1.5rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
+                    <div class="panel-columna">
                         <h4 style="margin-bottom: 1rem; color: var(--color-primario);">📋 Asignación por Área</h4>
                         
                         <div style="background: var(--color-fondo); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
@@ -76,29 +67,29 @@
                             <strong style="font-size: 1.5rem; color: var(--color-texto);">$<?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['presupuestoTotal'])); ?></strong>
                         </div>
 
-                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <table class="tabla-datos">
                             <thead>
-                                <tr style="border-bottom: 2px solid var(--color-borde);">
-                                    <th style="padding: 0.5rem;">Área</th>
-                                    <th style="padding: 0.5rem;">Porcentaje</th>
-                                    <th style="padding: 0.5rem; text-align: right;">Monto Asignado</th>
+                                <tr>
+                                    <th>Área</th>
+                                    <th>Porcentaje</th>
+                                    <th style="text-align: right;">Monto Asignado</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="border-bottom: 1px solid var(--color-borde);">
-                                    <td style="padding: 0.5rem; font-weight: 500;">Ginecología</td>
-                                    <td style="padding: 0.5rem; color: var(--color-texto-claro);"><?php echo Utilidades::escapar($resultado['porcentajes']['ginecologia']); ?>%</td>
-                                    <td style="padding: 0.5rem; text-align: right; font-weight: bold; color: var(--color-primario);">$<?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['distribucion']['ginecologia'])); ?></td>
+                                <tr>
+                                    <td style="font-weight: 500;">Ginecología</td>
+                                    <td style="color: var(--color-texto-claro);"><?php echo Utilidades::escapar($resultado['porcentajes']['ginecologia']); ?>%</td>
+                                    <td style="text-align: right; font-weight: bold; color: var(--color-primario);">$<?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['distribucion']['ginecologia'])); ?></td>
                                 </tr>
-                                <tr style="border-bottom: 1px solid var(--color-borde);">
-                                    <td style="padding: 0.5rem; font-weight: 500;">Traumatología</td>
-                                    <td style="padding: 0.5rem; color: var(--color-texto-claro);"><?php echo Utilidades::escapar($resultado['porcentajes']['traumatologia']); ?>%</td>
-                                    <td style="padding: 0.5rem; text-align: right; font-weight: bold; color: var(--color-primario);">$<?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['distribucion']['traumatologia'])); ?></td>
+                                <tr>
+                                    <td style="font-weight: 500;">Traumatología</td>
+                                    <td style="color: var(--color-texto-claro);"><?php echo Utilidades::escapar($resultado['porcentajes']['traumatologia']); ?>%</td>
+                                    <td style="text-align: right; font-weight: bold; color: var(--color-primario);">$<?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['distribucion']['traumatologia'])); ?></td>
                                 </tr>
-                                <tr style="border-bottom: 1px solid var(--color-borde);">
-                                    <td style="padding: 0.5rem; font-weight: 500;">Pediatría</td>
-                                    <td style="padding: 0.5rem; color: var(--color-texto-claro);"><?php echo Utilidades::escapar($resultado['porcentajes']['pediatria']); ?>%</td>
-                                    <td style="padding: 0.5rem; text-align: right; font-weight: bold; color: var(--color-primario);">$<?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['distribucion']['pediatria'])); ?></td>
+                                <tr>
+                                    <td style="font-weight: 500;">Pediatría</td>
+                                    <td style="color: var(--color-texto-claro);"><?php echo Utilidades::escapar($resultado['porcentajes']['pediatria']); ?>%</td>
+                                    <td style="text-align: right; font-weight: bold; color: var(--color-primario);">$<?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['distribucion']['pediatria'])); ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -106,7 +97,7 @@
                 </div>
 
                 <!-- Columna Gráfica -->
-                <div style="background: var(--color-superficie); padding: 1.5rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
+                <div class="panel-columna">
                     <h4 style="margin-bottom: 1rem; text-align: center;">Gráfica de Distribución</h4>
                     <canvas id="graficaPresupuesto" style="max-height: 300px; width: 100%;"></canvas>
                 </div>

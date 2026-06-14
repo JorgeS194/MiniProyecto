@@ -22,19 +22,10 @@
         Imprimir los N primeros múltiplos de 4, donde N es ingresado por el usuario.
     </p>
 
-    <?php if (!empty($errores)): ?>
-        <div class="error-box" style="text-align:left; margin-bottom:1.5rem;">
-            <strong>⚠️ Por favor corrige los siguientes errores:</strong>
-            <ul style="margin-top:.5rem; padding-left:1.25rem;">
-                <?php foreach ($errores as $e): ?>
-                    <li><?php echo Utilidades::escapar($e); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <?php Utilidades::mostrarErrores($errores); ?>
 
-    <form method="POST" action="index.php?problema=3" id="formProblema3" style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
-        <h3 style="margin-bottom: 1.5rem; color: var(--color-primario);">Generador de Múltiplos:</h3>
+    <form method="POST" action="index.php?problema=3" id="formProblema3" class="panel-formulario">
+        <h3 class="titulo-formulario">Generador de Múltiplos:</h3>
         
         <div class="form-group" style="margin-bottom: 1.5rem;">
             <label for="n" style="font-weight: 600; color: var(--color-texto);">Cantidad de múltiplos (N):</label>
@@ -54,14 +45,14 @@
             </span>
         </div>
         
-        <button type="submit" class="btn" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 600; transition: background 0.2s;">
+        <button type="submit" class="btn btn-bloque">
             ⚡ Generar Múltiplos
         </button>
     </form>
 
     <?php if ($resultado !== null): ?>
-        <div class="resultado" style="margin-top: 2rem; background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde); border-left: 6px solid var(--color-primario);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-primario); font-size: 1.35rem; margin-bottom: 1.5rem;">
+        <div class="resultado panel-resultado">
+            <h3 class="panel-resultado__titulo">
                 📊 Tabla de Múltiplos de 4
             </h3>
             <p style="color: var(--color-texto-claro); margin-bottom: 1rem;">
@@ -90,37 +81,7 @@
             </div>
         </div>
 
-        <style>
-            .tabla-multiplos {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 1rem;
-                background: var(--color-superficie);
-                border-radius: 8px;
-                overflow: hidden;
-                border: 1px solid var(--color-borde);
-            }
-            .tabla-multiplos th, .tabla-multiplos td {
-                padding: 0.85rem 1.25rem;
-                text-align: left;
-            }
-            .tabla-multiplos th {
-                background: var(--color-primario);
-                color: #ffffff;
-                font-weight: 600;
-                font-size: 0.95rem;
-            }
-            .tabla-multiplos tr:nth-child(even) {
-                background-color: var(--color-fondo);
-            }
-            .tabla-multiplos tr:hover {
-                background-color: rgba(37, 99, 235, 0.05);
-            }
-            .tabla-multiplos td {
-                border-bottom: 1px solid var(--color-borde);
-                font-size: 0.95rem;
-            }
-        </style>
+
     <?php endif; ?>
 
 </main>

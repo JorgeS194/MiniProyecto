@@ -20,6 +20,7 @@ class Problema7Controller
      * Límite máximo de notas permitido por seguridad (Prevención de DoS).
      */
     const MAX_NOTAS = 50;
+    const NOTA_MAXIMA = 100;
 
     /**
      * Muestra el formulario inicial del Problema 7 (paso 1: pedir N).
@@ -151,8 +152,8 @@ class Problema7Controller
                     $errores[] = "El campo Nota $i es requerido.";
                 } elseif (!Utilidades::validarNumero($valorSanitizado, false)) {
                     $errores[] = "El campo Nota $i debe ser un número válido y no puede ser negativo.";
-                } elseif ((float) $valorSanitizado > 100) {
-                    $errores[] = "El campo Nota $i no puede ser mayor a 100.";
+                } elseif ((float) $valorSanitizado > self::NOTA_MAXIMA) {
+                    $errores[] = "El campo Nota $i no puede ser mayor a " . self::NOTA_MAXIMA . ".";
                 }
             }
         }

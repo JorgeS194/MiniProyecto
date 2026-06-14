@@ -25,24 +25,15 @@
         para calcular el promedio, la desviación estándar, la nota mínima y la máxima.
     </p>
 
-    <?php if (!empty($errores)): ?>
-        <div class="error-box" style="text-align:left; margin-bottom:1.5rem;">
-            <strong>⚠️ Por favor corrige los siguientes errores:</strong>
-            <ul style="margin-top:.5rem; padding-left:1.25rem;">
-                <?php foreach ($errores as $e): ?>
-                    <li><?php echo Utilidades::escapar($e); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <?php Utilidades::mostrarErrores($errores); ?>
 
     <?php if ((int) ($paso ?? 1) === 1): ?>
 
         <!-- ═══ PASO 1: Pedir la cantidad de notas (N) ═══ -->
-        <form method="POST" action="index.php?problema=7" id="formProblema7Paso1" style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
+        <form method="POST" action="index.php?problema=7" id="formProblema7Paso1" class="panel-formulario">
             <input type="hidden" name="paso" value="1">
 
-            <h3 style="margin-bottom: 1.5rem; color: var(--color-primario);">Paso 1: ¿Cuántas notas desea ingresar?</h3>
+            <h3 class="titulo-formulario">Paso 1: ¿Cuántas notas desea ingresar?</h3>
 
             <div class="form-group" style="margin-bottom: 1.5rem;">
                 <label for="cantidad" style="font-weight: 600; color: var(--color-texto);">Cantidad de notas (N):</label>
@@ -62,7 +53,7 @@
                 </span>
             </div>
 
-            <button type="submit" class="btn" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 600; transition: background 0.2s;">
+            <button type="submit" class="btn btn-bloque">
                 ⚡ Continuar
             </button>
         </form>
@@ -70,15 +61,15 @@
     <?php else: ?>
 
         <!-- ═══ PASO 2: Ingresar las N notas ═══ -->
-        <form method="POST" action="index.php?problema=7" id="formProblema7Paso2" style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
+        <form method="POST" action="index.php?problema=7" id="formProblema7Paso2" class="panel-formulario">
             <input type="hidden" name="paso" value="2">
             <input type="hidden" name="cantidad" value="<?php echo Utilidades::escapar($cantidad); ?>">
 
-            <h3 style="margin-bottom: 1.5rem; color: var(--color-primario);">
+            <h3 class="titulo-formulario">
                 Paso 2: Ingrese las <?php echo Utilidades::escapar($cantidad); ?> notas
             </h3>
 
-            <div class="form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+            <div class="form-grid grid-inputs">
                 <?php for ($i = 1; $i <= (int) $cantidad; $i++): ?>
                     <div class="form-group" style="margin-bottom: 0;">
                         <label for="nota<?php echo $i; ?>" style="font-weight: 600; color: var(--color-texto);">Nota <?php echo $i; ?>:</label>
@@ -99,10 +90,10 @@
             </div>
 
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="index.php?problema=7" class="btn btn-secundario" style="flex: 1; text-align: center; padding: 0.85rem; font-size: 1rem; font-weight: 600;">
+                <a href="index.php?problema=7" class="btn btn-secundario btn-bloque" style="flex: 1; text-align: center;">
                     ↺ Cambiar cantidad de notas
                 </a>
-                <button type="submit" class="btn" style="flex: 1; padding: 0.85rem; font-size: 1rem; font-weight: 600; transition: background 0.2s;">
+                <button type="submit" class="btn btn-bloque" style="flex: 1;">
                     ⚡ Calcular Estadísticas
                 </button>
             </div>
@@ -111,8 +102,8 @@
     <?php endif; ?>
 
     <?php if ($resultado !== null): ?>
-        <div class="resultado" style="margin-top: 2rem; background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde); border-left: 6px solid var(--color-primario);">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-primario); font-size: 1.35rem; margin-bottom: 1.5rem;">
+        <div class="resultado panel-resultado">
+            <h3 class="panel-resultado__titulo">
                 📊 Resultados Estadísticos
             </h3>
 
@@ -122,28 +113,28 @@
             </p>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem;">
-                <div style="background: var(--color-fondo); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-primario);">
-                    <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Promedio</span>
-                    <strong style="font-size: 1.4rem; color: var(--color-texto);"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['promedio'], 4)); ?></strong>
+                <div class="tarjeta-metrica">
+                    <span class="tarjeta-metrica__etiqueta">Promedio</span>
+                    <strong class="tarjeta-metrica__valor"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['promedio'], 4)); ?></strong>
                 </div>
 
-                <div style="background: var(--color-fondo); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-secundario);">
-                    <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Desviación Estándar</span>
-                    <strong style="font-size: 1.4rem; color: var(--color-texto);">
+                <div class="tarjeta-metrica tarjeta-metrica--secundario">
+                    <span class="tarjeta-metrica__etiqueta">Desviación Estándar</span>
+                    <strong class="tarjeta-metrica__valor">
                         <?php echo $resultado['desviacion'] !== null
                             ? Utilidades::escapar(Utilidades::formatearNumero($resultado['desviacion'], 4))
                             : 'N/A'; ?>
                     </strong>
                 </div>
 
-                <div style="background: var(--color-fondo); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-exito);">
-                    <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Nota Mínima</span>
-                    <strong style="font-size: 1.4rem; color: var(--color-texto);"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['minima'], 2)); ?></strong>
+                <div class="tarjeta-metrica tarjeta-metrica--exito">
+                    <span class="tarjeta-metrica__etiqueta">Nota Mínima</span>
+                    <strong class="tarjeta-metrica__valor"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['minima'], 2)); ?></strong>
                 </div>
 
-                <div style="background: var(--color-fondo); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-error);">
-                    <span style="font-size: 0.85rem; color: var(--color-texto-claro); display: block; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Nota Máxima</span>
-                    <strong style="font-size: 1.4rem; color: var(--color-texto);"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['maxima'], 2)); ?></strong>
+                <div class="tarjeta-metrica tarjeta-metrica--error">
+                    <span class="tarjeta-metrica__etiqueta">Nota Máxima</span>
+                    <strong class="tarjeta-metrica__valor"><?php echo Utilidades::escapar(Utilidades::formatearNumero($resultado['maxima'], 2)); ?></strong>
                 </div>
             </div>
         </div>

@@ -14,6 +14,8 @@ class Problema9Controller
      * Cantidad de potencias a calcular, según el enunciado.
      */
     const TOTAL_POTENCIAS = 15;
+    const BASE_MINIMA = 1;
+    const BASE_MAXIMA = 9;
 
     /**
      * Muestra el formulario del Problema 9 sin procesar datos.
@@ -58,7 +60,7 @@ class Problema9Controller
 
             if ($numeroFloat != $numeroInt) {
                 $errores[] = 'El número debe ser un valor entero.';
-            } elseif ($numeroInt < 1 || $numeroInt > 9) {
+            } elseif ($numeroInt < self::BASE_MINIMA || $numeroInt > self::BASE_MAXIMA) {
                 $errores[] = 'El número debe estar entre 1 y 9.';
             }
         }

@@ -21,22 +21,13 @@
         Leer la edad de 5 personas, clasificarlas y visualizar las estadísticas.
     </p>
 
-    <?php if (!empty($errores)): ?>
-        <div class="error-box" style="text-align:left; margin-bottom:1.5rem;">
-            <strong>⚠️ Por favor corrige los siguientes errores:</strong>
-            <ul style="margin-top:.5rem; padding-left:1.25rem;">
-                <?php foreach ($errores as $e): ?>
-                    <li><?php echo Utilidades::escapar($e); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <?php Utilidades::mostrarErrores($errores); ?>
 
-    <form method="POST" action="index.php?problema=5" id="formProblema5" style="background: var(--color-superficie); padding: 2rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
-        <h3 style="margin-bottom: 1.5rem; color: var(--color-primario);">Ingresar Edades:</h3>
+    <form method="POST" action="index.php?problema=5" id="formProblema5" class="panel-formulario">
+        <h3 class="titulo-formulario">Ingresar Edades:</h3>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-            <?php for ($i = 1; $i <= 5; $i++): ?>
+        <div class="grid-inputs">
+            <?php for ($i = 1; $i <= Problema5Controller::TOTAL_PERSONAS; $i++): ?>
                 <div class="form-group" style="margin-bottom: 0;">
                     <label for="edad<?php echo $i; ?>" style="font-weight: 600; color: var(--color-texto);">Edad <?php echo $i; ?>:</label>
                     <input
@@ -54,7 +45,7 @@
             <?php endfor; ?>
         </div>
         
-        <button type="submit" class="btn" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 600; transition: background 0.2s;">
+        <button type="submit" class="btn btn-bloque">
             ⚡ Procesar y Clasificar
         </button>
     </form>
@@ -69,22 +60,22 @@
                 
                 <!-- Columna Detalles y Repetidas -->
                 <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <div style="background: var(--color-superficie); padding: 1.5rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
+                    <div class="panel-columna">
                         <h4 style="margin-bottom: 1rem; color: var(--color-primario);">📋 Detalle por Persona</h4>
-                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <table class="tabla-datos">
                             <thead>
-                                <tr style="border-bottom: 2px solid var(--color-borde);">
-                                    <th style="padding: 0.5rem;">Persona</th>
-                                    <th style="padding: 0.5rem;">Edad</th>
-                                    <th style="padding: 0.5rem;">Clasificación</th>
+                                <tr>
+                                    <th>Persona</th>
+                                    <th>Edad</th>
+                                    <th>Clasificación</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($resultado['detalle'] as $det): ?>
-                                    <tr style="border-bottom: 1px solid var(--color-borde);">
-                                        <td style="padding: 0.5rem;">#<?php echo Utilidades::escapar($det['persona']); ?></td>
-                                        <td style="padding: 0.5rem;"><strong><?php echo Utilidades::escapar($det['edad']); ?></strong> años</td>
-                                        <td style="padding: 0.5rem;"><span style="background: var(--color-fondo); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem;"><?php echo Utilidades::escapar($det['categoria']); ?></span></td>
+                                    <tr>
+                                        <td>#<?php echo Utilidades::escapar($det['persona']); ?></td>
+                                        <td><strong><?php echo Utilidades::escapar($det['edad']); ?></strong> años</td>
+                                        <td><span style="background: var(--color-fondo); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem;"><?php echo Utilidades::escapar($det['categoria']); ?></span></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -109,7 +100,7 @@
                 </div>
 
                 <!-- Columna Gráfica -->
-                <div style="background: var(--color-superficie); padding: 1.5rem; border-radius: var(--radio-borde); box-shadow: var(--sombra); border: 1px solid var(--color-borde);">
+                <div class="panel-columna">
                     <h4 style="margin-bottom: 1rem; text-align: center;">Distribución de Categorías</h4>
                     <canvas id="graficaEdades" style="max-height: 300px; width: 100%;"></canvas>
                 </div>
